@@ -114,3 +114,21 @@ def derive_parameters(R, top20_department_ids):
         "attempts_multiplier": attempts_multiplier,
         "random_seed": R
     }
+
+def subgraph(department_id, departments, edges):
+
+    # Get all nodes belonging to this department
+    department_nodes = {
+        node
+        for node, department in departments.items()
+        if department == department_id
+    }
+
+    # Keep only edges with both endpoints in this department
+    department_edges = [
+        (u, v)
+        for u, v in edges
+        if u in department_nodes and v in department_nodes
+    ]
+
+    return department_nodes, department_edges
