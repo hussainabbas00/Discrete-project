@@ -1,4 +1,3 @@
-
 from itertools import permutations
 
 
@@ -19,7 +18,9 @@ def triad_class(a, b, c, edges):
     """
 
     nodes = [a, b, c]
-    edge_set = set(edges)
+    # 'edges' should already be a set so membership checks are O(1).
+    # Only convert if a list was passed in.
+    edge_set = edges if isinstance(edges, (set, frozenset)) else set(edges)
 
     possible_edges = [
         (0, 1),
